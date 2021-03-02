@@ -1,11 +1,9 @@
-﻿using JobBoardTrackerAPI.Models;
+﻿using Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace JobBoardTrackerAPI.Controllers
 {
@@ -14,7 +12,7 @@ namespace JobBoardTrackerAPI.Controllers
     public class JobBoards : ControllerBase
     {
         [HttpGet]
-        public List<JobBoard> GetAllJobBoards()
+        public List<JobBoardModel> GetAllJobBoards()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
@@ -26,7 +24,7 @@ namespace JobBoardTrackerAPI.Controllers
 
             using (SqlConnection conn = new SqlConnection(builder.ConnectionString))
             {
-                var jobBoards = new List<JobBoard>();
+                var jobBoards = new List<JobBoardModel>();
 
                 try
                 {
@@ -42,7 +40,7 @@ namespace JobBoardTrackerAPI.Controllers
 
                         foreach (DataRow row in dt.Rows)
                         {
-                            var jobBoard = new JobBoard();
+                            var jobBoard = new JobBoardModel();
                             jobBoard.Name = row[0] != DBNull.Value ? (string)row[0] : "";
                             jobBoard.Rating = row[1] != DBNull.Value ? (string)row[1] : "";
                             jobBoard.Root_domain = row[2] != DBNull.Value ? (string)row[2] : "";

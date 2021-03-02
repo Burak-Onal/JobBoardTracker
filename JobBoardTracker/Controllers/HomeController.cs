@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using JobBoardTracker.Models;
 using System.Data.SqlClient;
+using System.Net.Http;
+using Models;
 
 namespace JobBoardTracker.Controllers
 {
@@ -21,15 +23,43 @@ namespace JobBoardTracker.Controllers
 
         public IActionResult Index()
         {
-
-            
-
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> JobBoardAsync()
         {
-            return View();
+            string url = "https://localhost:44349/JobBoards";
+            JobBoardViewModel jobBoards = new JobBoardViewModel();
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetStringAsync(url);
+                jobBoards = new JobBoardViewModel(response);
+            }
+
+            return View(jobBoards);
+        }
+
+        public async Task<IActionResult> JobsAsync(string source)
+        {
+            JobsViewModel jobs = new JobsViewModel();
+
+            if (source != null || source != "")
+            {
+                string url = "https://localhost:44349/Jobs?source=" + source;
+
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetStringAsync(url);
+                    jobs = new JobsViewModel(response);
+                    jobs.source = source;
+                }
+            }
+            else
+            {
+                jobs.errorMessage = "something went wrong";
+            }
+
+            return View(jobs);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

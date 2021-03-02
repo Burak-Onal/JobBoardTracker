@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobBoardTracker", "JobBoard
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobBoardTrackerAPI", "JobBoardTrackerAPI\JobBoardTrackerAPI.csproj", "{F57A9441-AA1F-4E24-9ACE-0FCF84063A89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{1710BAA0-0B94-48E1-82A3-1F19D136115B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F57A9441-AA1F-4E24-9ACE-0FCF84063A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F57A9441-AA1F-4E24-9ACE-0FCF84063A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F57A9441-AA1F-4E24-9ACE-0FCF84063A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1710BAA0-0B94-48E1-82A3-1F19D136115B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1710BAA0-0B94-48E1-82A3-1F19D136115B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1710BAA0-0B94-48E1-82A3-1F19D136115B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1710BAA0-0B94-48E1-82A3-1F19D136115B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,27 @@
+﻿@model JobBoardViewModel;
+
+<div class="container">
+    @{
+        var jobBoardList = Model.jobBoardLst;
+        <div class="row" style="min-width:400px">
+            @for (int k = 0; k < jobBoardList.Count; k++)
+            {
+            <div class="col-md-4 col-sm-6" style="display:flex">
+                <div class="thumbnail">
+                    <a href="@Url.Action("Jobs", null, new { source = jobBoardList[k].Name })">
+                        <div class="row">
+                            <div class="ml-auto small pr-4 text-success" style="font-size:9px">@jobBoardList[k].Rating</div>
+                        </div>
+                        <div class="row" style="height:90%">
+                            <img class="col-4" src="@jobBoardList[k].Logo_file" style="height: fit-content; align-self: center; min-height:20%"/>
+                            <div class="col-7 text-dark card-content">@jobBoardList[k].Description</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            }
+            </div>
+        //}
+    }
+</div>
+

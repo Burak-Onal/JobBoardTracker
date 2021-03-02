@@ -1,0 +1,43 @@
+﻿@model JobsViewModel 
+@{
+    if(Model.errorMessage != null)
+    {
+        @Model.errorMessage;
+    }
+    else
+    {
+        <h2>Job Source: @Model.source</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Job Title</th>
+                    <th scope="col">Job URL</th>
+                </tr>
+            </thead>
+            @foreach (var job in Model.jobLst)
+            {
+                <tbody>
+                    <tr class="clickable-row" data-href="@job.JobURL" target="_blank">
+                        <th scope="row">@job.ID</th>
+                        <td>@job.CompanyName</td>
+                        <td>@job.JobTitle</td>
+                        <td>@job.JobURL</td>
+                    </tr>
+                </tbody>
+            }
+
+        </table>
+    }
+}
+
+<script>
+    jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.open($(this).data("href"), "_blank");
+
+        });
+    });
+</script>

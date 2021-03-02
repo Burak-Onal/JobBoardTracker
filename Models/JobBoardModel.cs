@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace JobBoardTrackerAPI.Models
+﻿namespace Models
 {
-    public class JobBoard
+    public class JobBoardModel
     {
         public string Name { get; set; }
         public string Rating { get; set; }
