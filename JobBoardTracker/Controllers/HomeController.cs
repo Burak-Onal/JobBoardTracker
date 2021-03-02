@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using JobBoardTracker.Models;
+using System.Data.SqlClient;
 
 namespace JobBoardTracker.Controllers
 {
@@ -20,6 +21,9 @@ namespace JobBoardTracker.Controllers
 
         public IActionResult Index()
         {
+
+            
+
             return View();
         }
 
