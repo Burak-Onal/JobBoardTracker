@@ -40,3 +40,70 @@ EXTRA QUESTIONS
 -	How would you determine if a job application link is still active?
 	The app can make a call to the URL and read if it returns 404. If so the link is inactive.
 
+
+
+
+
+
+
+
+STORED PROCEDURES MENTIONED IN THE DESCRIPTION
+////////////////////////////////////////////////////////////////////////////
+ALTER PROCEDURE [dbo].[GerJobsBySource]
+(
+    @source nvarchar(100)
+)
+AS
+BEGIN
+WITH cte AS (
+    SELECT *,
+        ROW_NUMBER() OVER (
+            PARTITION BY [JobTitle],[CompanyName],[JobURL],[Source]
+            ORDER BY [JobTitle],[CompanyName],[JobURL],[Source]) rownum
+    FROM 
+        [dbo].[JobSourceResolution] 
+) 
+SELECT 
+  * 
+FROM 
+    cte 
+WHERE 
+    rownum = 1
+AND Source = @source
+END
+//////////////////////////////////////////////////////////////////////////////////
+ALTER PROCEDURE [dbo].[GetAllJobBoards]
+AS
+BEGIN
+	SELECT * FROM JobBoards
+END
+/////////////////////////////////////////////////////////////////////////////////
+ALTER PROCEDURE [dbo].[PopulateJobSourceResolutionTbl]
+AS
+BEGIN
+
+With CTE As
+(
+  SELECT 
+  DISTINCT
+	  [ID]
+	  ,[JobTitle]
+	  ,[CompanyName]
+	  ,[JobURL]
+	  ,IIF(CHARINDEX(jb.root_domain, jo.JobURL) > 0, IIF(name = CompanyName, 'Company', name), IIF(CompanyName = 'Unknown' OR CompanyName IS NULL, 'Unknown', 'Company')) as JobSource
+  FROM [dbo].[JobBoards] jb RIGHT JOIN [dbo].[JobOpportunities] jo
+  ON jb.root_domain = IIF(CHARINDEX(jb.root_domain, jo.JobURL) > 0, jb.root_domain, NULL)
+  Where 
+  --ID IS NOT NULL AND
+  --JobTitle IS NOT NULL AND
+  --CompanyName IS NOT NULL AND
+  LEN(JobURL) - LEN(REPLACE(JobURL, '/', '')) >=3 AND
+  LEN(JobURL) - LEN(REPLACE(JobURL, '.', '')) >=1
+
+)
+INSERT INTO dbo.JobSourceResolution(id, JobTitle, CompanyName, JobURL, Source)
+select * from CTE 
+order by ID
+
+END
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
