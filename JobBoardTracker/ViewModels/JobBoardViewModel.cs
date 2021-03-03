@@ -14,5 +14,6 @@ namespace JobBoardTracker.Models
         }
         public JobBoardViewModel() { }
         public List<JobBoardModel> jobBoardLst { get; set; }
+        public string errorMessage { get; set; }
     }
 }

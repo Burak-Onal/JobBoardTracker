@@ -30,10 +30,18 @@ namespace JobBoardTracker.Controllers
         {
             string url = "https://localhost:44349/JobBoards";
             JobBoardViewModel jobBoards = new JobBoardViewModel();
-            using (HttpClient client = new HttpClient())
+
+            try
             {
-                var response = await client.GetStringAsync(url);
-                jobBoards = new JobBoardViewModel(response);
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetStringAsync(url);
+                    jobBoards = new JobBoardViewModel(response);
+                }
+            }
+            catch
+            {
+                jobBoards.errorMessage = "something went wrong";
             }
 
             return View(jobBoards);
@@ -43,21 +51,29 @@ namespace JobBoardTracker.Controllers
         {
             JobsViewModel jobs = new JobsViewModel();
 
-            if (source != null || source != "")
+            try
             {
-                string url = "https://localhost:44349/Jobs?source=" + source;
-
-                using (HttpClient client = new HttpClient())
+                if (source != null || source != "")
                 {
-                    var response = await client.GetStringAsync(url);
-                    jobs = new JobsViewModel(response);
-                    jobs.source = source;
+                    string url = "https://localhost:44349/Jobs?source=" + source;
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var response = await client.GetStringAsync(url);
+                        jobs = new JobsViewModel(response);
+                        jobs.source = source;
+                    }
+                }
+                else
+                {
+                    jobs.errorMessage = "something went wrong";
                 }
             }
-            else
+            catch
             {
                 jobs.errorMessage = "something went wrong";
             }
+
 
             return View(jobs);
         }

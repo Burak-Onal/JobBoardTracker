@@ -1,6 +1,6 @@
-﻿@model JobsViewModel 
+﻿@model JobsViewModel
 @{
-    if(Model.errorMessage != null)
+    if (Model.errorMessage != null)
     {
         @Model.errorMessage;
     }
@@ -17,17 +17,30 @@
                     <th scope="col">Job URL</th>
                 </tr>
             </thead>
-            @foreach (var job in Model.jobLst)
-            {
-                <tbody>
-                    <tr class="clickable-row" data-href="@job.JobURL" target="_blank">
-                        <th scope="row">@job.ID</th>
-                        <td>@job.CompanyName</td>
-                        <td>@job.JobTitle</td>
-                        <td>@job.JobURL</td>
+
+            <tbody>
+                @if (Model.jobLst.Count > 0)
+                {
+                    @foreach (var job in Model.jobLst)
+                    {
+
+                        <tr class="clickable-row btn-light" data-href="@job.JobURL" target="_blank">
+                            <th scope="row">@job.ID</th>
+                            <td>@job.CompanyName</td>
+                            <td>@job.JobTitle</td>
+                            <td>@job.JobURL</td>
+                        </tr>
+
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                    <tr>No jobs today. May be tomorrow.</tr>
                     </tr>
-                </tbody>
-            }
+                }
+            </tbody>
 
         </table>
     }
@@ -41,3 +54,4 @@
         });
     });
 </script>
+<link href="~/css/view.css" rel="stylesheet" />
