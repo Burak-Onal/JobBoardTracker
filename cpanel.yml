@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/buragrvb/repositories/JobBoardTracker/
-    - /bin/cp -R images $DEPLOYPATH

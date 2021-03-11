@@ -11,8 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C8999C9-0C8C-4306-AEA2-0E3FCA1CE416}"
 	ProjectSection(SolutionItems) = preProject
+		.cpanel.yml = .cpanel.yml
 		count of jobs per source.xlsx = count of jobs per source.xlsx
-		deploy.cpanel.yml = deploy.cpanel.yml
 		job_source_resolution_data.csv.xlsx = job_source_resolution_data.csv.xlsx
 		ReadMe.md = ReadMe.md
 	EndProjectSection
